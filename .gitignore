@@ -1,0 +1,4 @@
+.env
+*.not
+data.sqllite
+main
