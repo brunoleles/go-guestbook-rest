@@ -1,4 +1,4 @@
-package controllers
+package guestbook
 
 import (
 	. "main/database"
@@ -8,16 +8,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
-type guestbookPostRequest struct {
-	//models.GuestbookModel
-	Name    string `json:"name" form:"name"`
-	Message string `json:"message" form:"message"`
-}
-
-type guestbookDeleteRequest struct {
-	ID string `json:"id" form:"id"`
-}
 
 func GuestbookGet(c *gin.Context) {
 	entries := []models.GuestbookModel{}
@@ -39,7 +29,7 @@ func GuestbookPost(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, support.ResponseOk{
-		Data: support.TransformGuestbook(entry),
+		Data: TransformGuestbook(entry),
 	})
 }
 

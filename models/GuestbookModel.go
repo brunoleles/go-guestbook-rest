@@ -1,3 +1,4 @@
+// TODO Check anda validates if refactoring to package "database" makes sense
 package models
 
 import "gorm.io/gorm"

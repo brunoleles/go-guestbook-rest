@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
-	"main/controllers"
 	. "main/database"
 	"main/models"
+	"main/modules/guestbook"
 	"main/support"
 
 	"github.com/gin-gonic/gin"
@@ -21,9 +21,9 @@ func newServer() *gin.Engine {
 		c.String(http.StatusOK, "pong")
 	})
 
-	server.GET("/guestbook", controllers.GuestbookGet)
-	server.POST("/guestbook", controllers.GuestbookPost)
-	server.DELETE("/guestbook", controllers.GuestbookDelete)
+	server.GET("/guestbook", guestbook.GuestbookGet)
+	server.POST("/guestbook", guestbook.GuestbookPost)
+	server.DELETE("/guestbook", guestbook.GuestbookDelete)
 
 	return server
 }
