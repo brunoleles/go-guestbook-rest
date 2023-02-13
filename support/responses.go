@@ -16,6 +16,7 @@ type ResponseNok struct {
 	Message string `json:"message",omitempty`
 }
 
+// @todo move to databse package
 func GromErrorResponse(c *gin.Context, err error) {
 	c.JSON(http.StatusNotFound, ResponseNok{
 		Error:   true,

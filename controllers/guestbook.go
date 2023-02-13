@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	. "main/database"
 	"main/models"
 	"main/support"
 	"net/http"
@@ -8,31 +9,31 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type GustbookPostRequest struct {
+type guestbookPostRequest struct {
 	//models.GuestbookModel
 	Name    string `json:"name" form:"name"`
 	Message string `json:"message" form:"message"`
 }
 
-type GustbookDeleteRequest struct {
+type guestbookDeleteRequest struct {
 	ID string `json:"id" form:"id"`
 }
 
 func GuestbookGet(c *gin.Context) {
 	entries := []models.GuestbookModel{}
-	support.GetDB().Find(&entries)
+	DB().Find(&entries)
 
 	c.JSON(http.StatusOK, entries)
 }
 
 func GuestbookPost(c *gin.Context) {
-	var request GustbookPostRequest
+	var request guestbookPostRequest
 	c.Bind(&request)
 
 	entry := models.GuestbookModel{}
 	support.CopyInto(request, &entry)
 
-	if r := support.GetDB().Create(&entry); r.Error != nil {
+	if r := DB().Create(&entry); r.Error != nil {
 		support.GromErrorResponse(c, r.Error)
 		return
 	}
@@ -43,16 +44,16 @@ func GuestbookPost(c *gin.Context) {
 }
 
 func GuestbookDelete(c *gin.Context) {
-	var request GustbookDeleteRequest
+	var request guestbookDeleteRequest
 	c.Bind(&request)
 
 	entry := models.GuestbookModel{}
-	if r := support.GetDB().First(&entry, request.ID); r.Error != nil {
+	if r := DB().First(&entry, request.ID); r.Error != nil {
 		support.GromErrorResponse(c, r.Error)
 		return
 	}
 
-	if r := support.GetDB().Delete(&entry); r.Error != nil {
+	if r := DB().Delete(&entry); r.Error != nil {
 		support.GromErrorResponse(c, r.Error)
 		return
 	}

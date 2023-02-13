@@ -2,3 +2,4 @@
 *.not
 data.sqllite
 main
+__debug_bin
