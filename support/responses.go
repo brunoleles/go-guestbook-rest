@@ -13,7 +13,7 @@ type ResponseOk struct {
 
 type ResponseNok struct {
 	Error   bool   `json:"error"`
-	Message string `json:"message",omitempty`
+	Message string `json:"message,omitempty"`
 }
 
 // @todo move to databse package
